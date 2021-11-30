@@ -1,4 +1,5 @@
 const db = require('../models');
+var base64 = require('base-64');
 const Doctor = db.doctors;
 
 //Create and save a new doctor
@@ -16,7 +17,7 @@ exports.create = (req, res) => {
   }
 
   //Create a doctor
-  const patient = new Patient({
+  const doctor = new Doctor({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -24,7 +25,7 @@ exports.create = (req, res) => {
     description: req.body.description,
   });
 
-  //Save patient in database
+  //Save doctor in database
   doctor
     .save(doctor)
     .then((data) => {
