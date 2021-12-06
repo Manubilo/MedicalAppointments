@@ -2,15 +2,18 @@
   <div class="max-w-7xl mx-auto">
     <Header />
     <div class="m-4">
-      <p class="text-3xl text-indigo-700">Patients</p>
+      <p class="text-3xl text-indigo-700">Doctors</p>
     </div>
-    <div class="m-4">
-      <ul v-for="patient in patients" :key="patient.email">
-        <li>{{ patient.firstName + " " + patient.lastName }}</li>
+    <div class="m-4" v-if="areDoctors">
+      <ul v-for="doctor in doctors" :key="doctor.email">
+        <li>{{ doctor.firstName + " " + doctor.lastName }}</li>
       </ul>
     </div>
+    <div v-if="!areDoctors">
+      <p>There are no doctors :(</p>
+    </div>
     <div class="m-4">
-      <p class="text-3xl text-indigo-700">Add Patients</p>
+      <p class="text-3xl text-indigo-700">Add Doctors</p>
     </div>
     <div class="m-4">
       <div class="mt-5 md:mt-0 md:col-span-2">
@@ -85,7 +88,7 @@
                 type="submit"
                 class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Save Patient
+                Save Doctor
               </button>
             </div>
           </div>
@@ -101,14 +104,14 @@ import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default Vue.extend({
   data: {
-    firstName: "hola",
+    areDoctors: false,
   },
   created() {
-    this.$store.dispatch("patients/getPatients");
+    this.$store.dispatch("doctors/getDoctors");
   },
   computed: {
-    patients() {
-      return this.$store.getters["patients/getPatients"];
+    doctors() {
+      return this.$store.getters["doctors/getDoctors"];
     },
   },
 });

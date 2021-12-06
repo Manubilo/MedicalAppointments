@@ -32,6 +32,8 @@ app.get('/', (req, res) => {
 });
 
 require('./app/routes/patient.routes')(app);
+require('./app/routes/doctor.routes')(app);
+require('./app/routes/appointment.routes')(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
