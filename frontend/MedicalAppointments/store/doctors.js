@@ -4,7 +4,7 @@ const headers = { Accept: "application/json" };
 
 //state
 export const state = () => ({
-  patients: [],
+  doctors: [],
 });
 
 //getters
@@ -16,14 +16,19 @@ export const getters = {
 export const actions = {
   async getDoctors({ commit }) {
     const { data } = await this.$axios.get(url + "/doctors");
-    console.log(data);
     commit("setDoctors", data);
+  },
+  async addDoctor({ commit }, payload) {
+    console.log("payload = ", payload);
+    axios.post(url + "/doctors", payload).then((result) => {
+      console.log(result);
+    });
   },
 };
 
 //mutations
 export const mutations = {
-  setPatients(state, doctors) {
+  setDoctors(state, doctors) {
     state.doctors = doctors;
   },
 };
